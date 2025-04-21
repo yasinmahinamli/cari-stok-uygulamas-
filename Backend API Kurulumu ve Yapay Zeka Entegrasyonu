@@ -11,3 +11,19 @@ class ProductViewSet(viewsets.ModelViewSet):
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+class RecommendationEngine:
+    def recommend(self, user_id):
+        # Kullanıcı geçmişine göre öneri algoritması
+        return ["Ürün A", "Ürün B"]
+
+
+# ai/pricing.py
+
+class DynamicPricing:
+    def calculate_price(self, base_price, demand_level):
+        # Basit bir dinamik fiyatlandırma algoritması
+        if demand_level > 0.8:
+            return base_price * 1.2
+        elif demand_level < 0.3:
+            return base_price * 0.9
+        return base_price
