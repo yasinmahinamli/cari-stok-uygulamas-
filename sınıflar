@@ -1,0 +1,25 @@
+class SystemAnalyzer:
+    def analyze_current_systems(self):
+        # Sistem analizi kodu
+        return "Mevcut sistemler analiz edildi."
+
+
+class UserStory:
+    def __init__(self, title, description, role, goal):
+        self.title = title
+        self.description = description
+        self.role = role
+        self.goal = goal
+
+    def format_story(self):
+        return f"{self.role} olarak, {self.goal} istiyorum. ({self.title})"
+
+
+class DatabaseSchemaDesigner:
+    def generate_schema(self):
+        # Veritabanı şeması tasarımı
+        return {
+            "Product": ["name", "price", "stock"],
+            "Order": ["user", "product", "quantity", "status"],
+            "User": ["username", "email", "password"]
+        }
