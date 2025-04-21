@@ -1,0 +1,30 @@
+# ui/components.py
+
+class UIComponent:
+    def render(self):
+        raise NotImplementedError
+
+
+class LoginPage(UIComponent):
+    def render(self):
+        return "<LoginPage: Kullanıcı giriş ekranı>"
+
+
+class ProductListPage(UIComponent):
+    def render(self):
+        return "<ProductListPage: Ürün listeleme ekranı>"
+
+
+class OrderManagementPage(UIComponent):
+    def render(self):
+        return "<OrderManagementPage: Sipariş yönetimi ekranı>"
+
+
+class AccountPage(UIComponent):
+    def render(self):
+        return "<AccountPage: Cari hesap ekranı>"
+
+
+class AdminPanelPage(UIComponent):
+    def render(self):
+        return "<AdminPanelPage: Admin kontrol paneli>"
