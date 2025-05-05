@@ -1,0 +1,59 @@
+import React from "react";
+
+export default function AdminDashboard() {
+  return (
+    <div className="min-h-screen bg-gray-100 p-6">
+      <h1 className="text-3xl font-bold mb-6">Atölye Yönetim Paneli</h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Günlük Üretim Bilgisi */}
+        <Card title="Günlük Üretim">
+          <p>Toplam: 5.200 adet</p>
+          <p>Mutfak-Banyo: 1.200</p>
+          <p>Cam-Ayna: 1.000</p>
+        </Card>
+
+        {/* Hammadde Stok Durumu */}
+        <Card title="Hammadde Stokları">
+          <p>Kumaş: 320 metre</p>
+          <p>İplik: 25 kg</p>
+          <p>Etiket: 2.000 adet</p>
+        </Card>
+
+        {/* Üretim Planı */}
+        <Card title="Üretim Planı">
+          <p>Bugün: Araba Bezleri</p>
+          <p>Yarın: Parke-Fayans</p>
+        </Card>
+
+        {/* Sipariş Durumu */}
+        <Card title="Siparişler">
+          <p>Bekleyen: 12</p>
+          <p>Üretimde: 5</p>
+          <p>Kargoda: 7</p>
+        </Card>
+
+        {/* Personel Takibi */}
+        <Card title="Personel Durumu">
+          <p>Toplam: 10 çalışan</p>
+          <p>Bugün çalışan: 8</p>
+        </Card>
+
+        {/* Arıza Bildirimi */}
+        <Card title="Makine Durumu">
+          <p>1 makine bakımda</p>
+          <p>Diğerleri çalışıyor</p>
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+function Card({ title, children }) {
+  return (
+    <div className="bg-white p-4 rounded-2xl shadow-md">
+      <h2 className="text-xl font-semibold mb-2">{title}</h2>
+      <div className="text-gray-700 text-sm">{children}</div>
+    </div>
+  );
+}
