@@ -15,16 +15,16 @@ const App = () => {
   const [input, setInput] = useState('');
   const [response, setResponse] = useState('');
 
-  // Firebase Bildirim Dinleme
+  
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
-      Alert.alert('📩 Bildirim', remoteMessage.notification?.body || 'Yeni mesaj!');
+      Alert.alert('Bildirim', remoteMessage.notification?.body || 'Yeni mesaj!');
     });
 
     return unsubscribe;
   }, []);
 
-  // Yapay Zeka'dan Yanıt Alma
+  
   const askAI = async () => {
     try {
       const res = await axios.post(
@@ -51,7 +51,7 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.inner}>
-        <Text style={styles.title}>🤖 Yapay Zeka Asistanı</Text>
+        <Text style={styles.title}> Yapay Zeka Asistanı</Text>
 
         <TextInput
           style={styles.input}
