@@ -1,0 +1,91 @@
+import React, { useEffect, useState } from 'react';
+import {
+  SafeAreaView,
+  Text,
+  TextInput,
+  Button,
+  Alert,
+  ScrollView,
+  StyleSheet
+} from 'react-native';
+import messaging from '@react-native-firebase/messaging';
+import axios from 'axios';
+
+const App = () => {
+  const [input, setInput] = useState('');
+  const [response, setResponse] = useState('');
+
+  // Firebase Bildirim Dinleme
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      Alert.alert('📩 Bildirim', remoteMessage.notification?.body || 'Yeni mesaj!');
+    });
+
+    return unsubscribe;
+  }, []);
+
+  // Yapay Zeka'dan Yanıt Alma
+  const askAI = async () => {
+    try {
+      const res = await axios.post(
+        'https://api.openai.com/v1/chat/completions',
+        {
+          model: "gpt-4",
+          messages: [{ role: "user", content: input }]
+        },
+        {
+          headers: {
+            'Authorization': `Bearer YOUR_OPENAI_API_KEY`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      const content = res.data.choices[0].message.content;
+      setResponse(content);
+    } catch (error) {
+      console.error('AI Hatası:', error);
+      Alert.alert('Hata', 'Yapay zeka yanıtı alınamadı.');
+    }
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.inner}>
+        <Text style={styles.title}>🤖 Yapay Zeka Asistanı</Text>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Bir şeyler sor..."
+          value={input}
+          onChangeText={setInput}
+        />
+
+        <Button title="Sor" onPress={askAI} />
+
+        {response.length > 0 && (
+          <>
+            <Text style={styles.subtitle}>Yanıt:</Text>
+            <Text style={styles.response}>{response}</Text>
+          </>
+        )}
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#fff' },
+  inner: { padding: 20 },
+  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 10 },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 10
+  },
+  subtitle: { marginTop: 20, fontWeight: 'bold', fontSize: 16 },
+  response: { marginTop: 10, fontSize: 15 }
+});
+
+export default App;
